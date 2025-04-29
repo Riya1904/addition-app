@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    triggers {
+        cron('*/2 * * * *') // Runs every 2 minutes
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/yourusername/addition-app.git'
+            }
+        }
+
+        stage('Build and Run Java Program') {
+            steps {
+                sh 'chmod +x build.sh'
+                sh './build.sh'
+            }
+        }
+    }
+}
